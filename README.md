@@ -4,7 +4,7 @@
 
 This repository contains a NestJS server configured as an OpenID Connect service provider. The server has authentication and logout endpoints and recognize returning users in compliance with the OpenID Connect standard.
 
-Once the server is running, you can access the client in your browser by navigating to https://fs.tpommellet.docker.dev-franceconnect.fr
+Once the server is running, you can access the client in your browser by navigating to https://fs.tpommellet.docker.dev-franceconnect.fr </br>
 Once authenticated, you can access protected resources by navigating to https://fs.tpommellet.docker.dev-franceconnect.fr/protected
 
 <details>
