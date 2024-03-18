@@ -1,0 +1,58 @@
+<!-- Very simple client to test the oidc provider -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple oidc provider</title>
+</head>
+<body>
+
+<div id="content"></div> <!-- Placeholder for welcome message or button -->
+
+<script>
+    function createContent(user) {
+        const contentDiv = document.getElementById('content');
+        if (user) {
+            // If user is authenticated, display welcome message and logout button
+            contentDiv.innerHTML = `<div>Welcome ${user.givenName} ${user.familyName}</div>`;
+            const logoutButtonDiv = document.createElement('div');
+            const logoutButton = document.createElement('button');
+            logoutButton.textContent = 'Logout';
+            logoutButton.addEventListener('click', function() {
+                window.location.href = '/api/logout-url';
+            });
+            logoutButtonDiv.appendChild(logoutButton);
+            contentDiv.appendChild(logoutButtonDiv);
+        } else {
+            // If user is not authenticated, display the login button
+            const button = document.createElement('button');
+            button.textContent = 'Login';
+            button.addEventListener('click', function() {
+                window.location.href = '/api/authorization-url';
+            });
+            contentDiv.appendChild(button);
+        }
+    }
+
+    // Check authentication by calling the protected endpoint
+    async function checkAuthentication() {
+        const response = await fetch('/protected', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (response.ok) {
+            const user = await response.json();
+            createContent(user);
+        } else {
+            createContent(null);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', checkAuthentication);
+</script>
+
+</body>
+</html>
