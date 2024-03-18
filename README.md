@@ -5,6 +5,14 @@
 This repository contains a NestJS server configured as an OpenID Connect service provider. The server has authentication and logout endpoints and recognize returning users in compliance with the OpenID Connect standard.
 
 Once the server is running, you can access the client in your browser by navigating to https://fs.tpommellet.docker.dev-franceconnect.fr
+Once authenticated, you can access protected resources by navigating to https://fs.tpommellet.docker.dev-franceconnect.fr/protected
+
+<details>
+<summary>screen recording</summary>
+
+https://github.com/tangzpmlt/franceconnect/assets/149596556/b520f2e5-5c89-46c6-a9bf-cdb5c93cd367
+
+</details>
 
 ## Limitations and Design Choices
 
@@ -51,6 +59,26 @@ To run the app in a Docker container, execute:
 ```bash
 $ docker run -p 443:443 franceconnect-app
 ```
+
+### Tests
+
+Run your tests with the following commands:
+
+```bash
+# unit tests
+$ docker exec <container_id> npm run test
+
+# end to end tests
+$ docker exec <container_id> npm run test:e2e
+
+# test coverage
+$ docker exec <container_id> npm run test:cov
+```
+
+
+
+
+
 
 ## Installation without dockers
 
